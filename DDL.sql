@@ -56,7 +56,7 @@ CREATE UNIQUE INDEX ON "eco_inventory" ("id_product", "id_warehouse");
 
 ALTER TABLE "eco_products" ADD FOREIGN KEY ("id_category") REFERENCES "eco_category" ("id_category") DEFERRABLE INITIALLY IMMEDIATE;
 
-ALTER TABLE "eco_orders" ADD FOREIGN KEY ("id_clients") REFERENCES "eco_clients" ("id_client") DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE "eco_orders" ADD FOREIGN KEY ("id_client") REFERENCES "eco_clients" ("id_client") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "eco_orders" ADD FOREIGN KEY ("id_city") REFERENCES "eco_city" ("id_city") DEFERRABLE INITIALLY IMMEDIATE;
 

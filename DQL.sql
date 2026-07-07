@@ -48,7 +48,7 @@ SELECT
     cust.client_name,
     COUNT(o.id_order) AS eco_total_orders
 FROM eco_clients cust
-LEFT JOIN eco_orders o ON cust.id_client = o.id_clients
+LEFT JOIN eco_orders o ON cust.id_client = o.id_client
 GROUP BY cust.id_client, cust.client_name
 ORDER BY eco_total_orders DESC
 LIMIT 10; 

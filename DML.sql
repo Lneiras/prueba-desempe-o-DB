@@ -19,7 +19,7 @@ INSERT INTO public.eco_city (city_name) VALUES
     ('Medellín'),
     ('Cali'),
     ('Barranquilla'),
-    ('Cartagena '),
+    ('Cartagena'),
     ('Bucaramanga'),
     ('Pereira'),
     ('Manizales'),
@@ -78,26 +78,16 @@ INSERT INTO public.eco_orders (order_code,order_date,id_client,id_city,id_wareho
     ('O1020','2026-05-19',8,9,5);
 
 INSERT INTO public.eco_inventory (id_product,id_warehouse,stock) VALUES
-	(1,1,100),
-	(1,1,95),
-	(2,2,180),
-	(2,2,165),
-	(3,3,60),
-	(3,3,52),
-	(4,4,70),
-	(4,4,60),
-	(5,4,200),
-	(5,4,182),
-	(5,5,40),
-	(5,5,36),
-	(7,6,90),
-	(7,6,81),
-	(8,6,120),
-	(8,6,104),
-	(9,1,50),
-	(9,1,43),
-	(10,5,140),
-	(10,5,127);
+    (1,1,95),
+    (2,2,165),
+    (3,3,52),
+    (4,4,60),
+    (5,4,182),
+    (6,7,36),
+    (7,5,81),
+    (8,5,104),
+    (9,1,43),
+    (10,7,127);
 
 
 INSERT INTO public.eco_order_detail (id_order,id_product,quantity) VALUES
@@ -111,8 +101,8 @@ INSERT INTO public.eco_order_detail (id_order,id_product,quantity) VALUES
     (8,4,10),
     (9,5,30),
     (10,5,18),
-    (11,5,6),
-    (12,5,4),
+    (11,6,6),
+    (12,6,4),
     (13,7,14),
     (14,7,9),
     (15,8,22),
