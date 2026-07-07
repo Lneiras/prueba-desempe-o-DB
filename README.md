@@ -1,7 +1,7 @@
 # EcoMarket Riwi S.A.S. - Relational Database Project
 
 ## Project Description
-This project designs and implements a professional relational database solution for **EcoMarket Riwi S.A.S.**. The organization previously managed its operation using a single flat Excel sheet, causing data duplication, inconsistent city names, and incorrect inventory tracking. 
+This project designs and implements a professional relational database solution for **EcoMarket Riwi S.A.S.**. The organization previously managed its operation using a single flat Excel sheet, causing data duplication, inconsistent city names, and incorrect inventory tracking.
 
 This solution normalizes the data up to the Third Normal Form (3FN), eliminating errors and ensuring database integrity.
 
@@ -11,7 +11,7 @@ This solution normalizes the data up to the Third Normal Form (3FN), eliminating
 - **Database Engine:** PostgreSQL 15
 - **Containerization:** Docker & Docker Compose
 - **Database Tool:** DBeaver Community Edition
-- **Language:** SQL (DDL and DML)
+- **Language:** SQL (DDL, DML, and DQL)
 
 ---
 
@@ -23,12 +23,23 @@ This solution normalizes the data up to the Third Normal Form (3FN), eliminating
 
 ## Project Structure
 ```text
-├── Data/                       # Contains clean CSV data files for loading
-├── Docs/                       # Contains the Entity-Relationship Diagram (ERD)
-├── Dataset_EcoMarketRiwi...xlsx # Original legacy Excel file
-├── DDL.sql                     # Database schema creation script
-├── docker-compose.yml          # Docker container configuration setup
-└── README.md                   # Project documentation
+├── Data/                                          # Contains clean CSV data files for loading
+│   ├── category.csv
+│   ├── city.csv
+│   ├── clients.csv
+│   ├── inventory.csv
+│   ├── order.csv
+│   ├── order_detail.csv
+│   ├── products.csv
+│   └── warehouse.csv
+├── Docs/
+│   └── MER EcoMarket Riwi S.A.S.png               # Entity-Relationship Diagram (ERD)
+├── Dataset_EcoMarketRiwi_Jornada_Tarde (1).xlsx    # Original legacy Excel file
+├── DDL.sql                                         # Database schema creation script
+├── DML.sql                                         # Data loading / insert script
+├── DQL.sql                                         # Business decision-making queries (Query 1-6)
+├── docker-compose.yml                              # Docker container configuration setup
+└── README.md                                       # Project documentation
 ```
 
 ---
@@ -42,17 +53,30 @@ This solution normalizes the data up to the Third Normal Form (3FN), eliminating
 
 ## Entity Relationship Diagram (ERD)
 The model includes the following main tables:
-- `eco_cities`
-- `eco_categories`
+- `eco_city`
+- `eco_category`
 - `eco_products`
-- `eco_customers`
-- `eco_distribution_centers`
-- `eco_inventories`
-- `eco_orders`
-- `eco_order_details`
+- `eco_clients`
+- `eco_warehouse`
+- `eco_inventory`
+- `eco_order`
+- `eco_order_detail`
 
-*(Add your ERD image file inside the Docs/ folder and reference it below)*
-![ERD Diagram](./Docs/eco_market_erd.png)
+---
+
+## CSV to Table Mapping
+The original flat data was split into normalized CSV files, each loaded into its corresponding table:
+
+| CSV File | Table |
+|---|---|
+| `city.csv` | `eco_city` |
+| `category.csv` | `eco_category` |
+| `products.csv` | `eco_products` |
+| `clients.csv` | `eco_clients` |
+| `warehouse.csv` | `eco_warehouse` |
+| `inventory.csv` | `eco_inventory` |
+| `order.csv` | `eco_order` |
+| `order_detail.csv` | `eco_order_detail` |
 
 ---
 
@@ -74,15 +98,18 @@ Create a new **PostgreSQL** connection with these parameters:
 
 ### 3. Database Initialization & Data Loading Sequence
 Open a SQL Editor in DBeaver and execute your scripts in this exact order to prevent Foreign Key constraint errors:
+
 1. Run **`DDL.sql`** to generate the database structure.
-2. Load data into independent tables first: `eco_cities` and `eco_categories`.
-3. Load data into main entities next: `eco_customers`, `eco_distribution_centers`, and `eco_products`.
-4. Load operational data last: `eco_inventories`, `eco_orders`, and `eco_order_details`.
+2. Run **`DML.sql`** to load data in the correct order:
+   - Independent tables first: `eco_city`, `eco_category`
+   - Main entities next: `eco_clients`, `eco_warehouse`, `eco_products`
+   - Operational data last: `eco_inventory`, `eco_order`, `eco_order_detail`
+3. Run **`DQL.sql`** to execute the business reference queries (see below).
 
 ---
 
 ## SQL Query Reference
-The project includes ready-to-run queries inside DBeaver for business decision-making:
+The project includes ready-to-run queries inside `DQL.sql` for business decision-making:
 - **Query 1:** Available inventory stock per individual product.
 - **Query 2:** Historical log of total orders grouped by city.
 - **Query 3:** Total sales revenue generated per food category.
