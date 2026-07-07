@@ -57,9 +57,9 @@ The model includes the following main tables:
 - `eco_category`
 - `eco_products`
 - `eco_clients`
-- `eco_warehouse`
+- `eco_warehouses`
 - `eco_inventory`
-- `eco_order`
+- `eco_orders`
 - `eco_order_detail`
 
 ---

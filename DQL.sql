@@ -1,76 +1,65 @@
 
--- consulta 1
+
 
 SELECT 
-    p.eco_product_id,
-    p.eco_product_name,
-    SUM(i.eco_quantity) AS eco_total_stock
+    p.id_product,
+    p.product_name,
+    SUM(i.stock) AS eco_total_stock
 FROM eco_products p
-LEFT JOIN eco_inventories i ON p.eco_product_id = i.eco_product_id
-GROUP BY p.eco_product_id, p.eco_product_name
+LEFT JOIN eco_inventory i ON p.id_product = i.id_product
+GROUP BY p.id_product, p.product_name
 ORDER BY eco_total_stock DESC;
 
-
 -- Consulta 2 
-
 SELECT 
-    c.eco_city_id,
-    c.eco_city_name,
-    COUNT(o.eco_order_id) AS eco_total_orders
-FROM eco_cities c
-LEFT JOIN eco_customers cust ON c.eco_city_id = cust.eco_city_id
-LEFT JOIN eco_orders o ON cust.eco_customer_id = o.eco_customer_id
-GROUP BY c.eco_city_id, c.eco_city_name
+    c.id_city,
+    c.city_name,
+    COUNT(o.id_order) AS eco_total_orders
+FROM eco_city c
+LEFT JOIN eco_orders o ON c.id_city = o.id_city
+GROUP BY c.id_city, c.city_name
 ORDER BY eco_total_orders DESC;
 
-
 -- Consulta 3 
-
 SELECT 
-    cat.eco_category_id,
-    cat.eco_category_name,
-    COALESCE(SUM(od.eco_quantity * od.eco_unit_price), 0) AS eco_total_revenue
-FROM eco_categories cat
-LEFT JOIN eco_products p ON cat.eco_category_id = p.eco_category_id
-LEFT JOIN eco_order_details od ON p.eco_product_id = od.eco_product_id
-GROUP BY cat.eco_category_id, cat.eco_category_name
+    cat.id_category,
+    cat.category_name,
+    COALESCE(SUM(od.quantity * p.unit_price), 0) AS eco_total_revenue
+FROM eco_category cat
+LEFT JOIN eco_products p ON cat.id_category = p.id_category
+LEFT JOIN eco_order_detail od ON p.id_product = od.id_product
+GROUP BY cat.id_category, cat.category_name
 ORDER BY eco_total_revenue DESC;
 
-
--- Consulta 4
-
+-- Consulta 4 
 SELECT 
-    p.eco_product_id,
-    p.eco_product_name,
-    SUM(i.eco_quantity) AS eco_total_stock
+    p.id_product,
+    p.product_name,
+    SUM(i.stock) AS eco_total_stock
 FROM eco_products p
-LEFT JOIN eco_inventories i ON p.eco_product_id = i.eco_product_id
-GROUP BY p.eco_product_id, p.eco_product_name
-HAVING SUM(i.eco_quantity) < 50 
+LEFT JOIN eco_inventory i ON p.id_product = i.id_product
+GROUP BY p.id_product, p.product_name
+HAVING SUM(i.stock) < 100 
 ORDER BY eco_total_stock ASC;
 
-
 -- Consulta 5 
-
 SELECT 
-    cust.eco_customer_id,
-    cust.eco_customer_name,
-    COUNT(o.eco_order_id) AS eco_total_orders
-FROM eco_customers cust
-LEFT JOIN eco_orders o ON cust.eco_customer_id = o.eco_customer_id
-GROUP BY cust.eco_customer_id, cust.eco_customer_name
+    cust.id_client,
+    cust.client_name,
+    COUNT(o.id_order) AS eco_total_orders
+FROM eco_clients cust
+LEFT JOIN eco_orders o ON cust.id_client = o.id_clients
+GROUP BY cust.id_client, cust.client_name
 ORDER BY eco_total_orders DESC
-LIMIT 10; -- Muestra el Top 10 de clientes más activos
+LIMIT 10; 
 
-
--- Consulta 6
-
+-- Consulta 6 
 SELECT 
-    dc.eco_center_id,
-    dc.eco_center_name,
-    SUM(i.eco_quantity * p.eco_standard_price) AS eco_inventory_value
-FROM eco_distribution_centers dc
-JOIN eco_inventories i ON dc.eco_center_id = i.eco_center_id
-JOIN eco_products p ON i.eco_product_id = p.eco_product_id
-GROUP BY dc.eco_center_id, dc.eco_center_name
+    dc.id_warehouse,
+    dc.warehouse_name,
+    SUM(i.stock * p.unit_price) AS eco_inventory_value
+FROM eco_warehouses dc
+JOIN eco_inventory i ON dc.id_warehouse = i.id_warehouse
+JOIN eco_products p ON i.id_product = p.id_product
+GROUP BY dc.id_warehouse, dc.warehouse_name
 ORDER BY eco_inventory_value DESC;

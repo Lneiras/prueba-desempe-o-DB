@@ -21,7 +21,7 @@ INSERT INTO public.eco_city (city_name) VALUES
     ('Barranquilla'),
     ('Cartagena '),
     ('Bucaramanga'),
-    ('Pereria'),
+    ('Pereira'),
     ('Manizales'),
     ('Cúcuta');
 
@@ -44,6 +44,7 @@ INSERT INTO public.eco_category (category_name) VALUES
 
 INSERT INTO public.eco_products (product_name,id_category,unit_price) VALUES
 	('Apple Gala',1,2.50),
+    ('Bananas',1,1.20),
 	('Milk 1L',2,3.80),
 	('Chicken',3,6.50),
 	('Rice',4,2.00),
@@ -51,10 +52,30 @@ INSERT INTO public.eco_products (product_name,id_category,unit_price) VALUES
 	('Eggs x12',2,4.20),
 	('Tomato',6,1.80),
 	('Lettuce',6,1.10),
-	('Spaghett',4,2.30),
-	('Bananas',1,1.20);
+	('Spaghett',4,2.30);
 
 
+INSERT INTO public.eco_orders (order_code,order_date,id_client,id_city,id_warehouse) VALUES
+    ('O1001','2026-05-01',1,1,1),
+    ('O1002','2026-05-02',1,1,1),
+    ('O1003','2026-05-02',2,2,2),
+    ('O1004','2026-05-03',2,2,2),
+    ('O1005','2026-05-04',3,3,3),
+    ('O1006','2026-05-05',3,3,3),
+    ('O1007','2026-05-06',1,4,4),
+    ('O1008','2026-05-07',1,4,4),
+    ('O1009','2026-05-08',4,5,4),
+    ('O1010','2026-05-09',4,5,4),
+    ('O1011','2026-05-10',5,6,5),
+    ('O1012','2026-05-11',5,6,5),
+    ('O1013','2026-05-12',9,7,6),
+    ('O1014','2026-05-13',9,7,6),
+    ('O1015','2026-05-14',6,8,6),
+    ('O1016','2026-05-15',6,8,6),
+    ('O1017','2026-05-16',7,1,1),
+    ('O1018','2026-05-17',7,1,1),
+    ('O1019','2026-05-18',8,9,5),
+    ('O1020','2026-05-19',8,9,5);
 
 INSERT INTO public.eco_inventory (id_product,id_warehouse,stock) VALUES
 	(1,1,100),
@@ -101,24 +122,3 @@ INSERT INTO public.eco_order_detail (id_order,id_product,quantity) VALUES
     (19,10,19),
     (20,10,13);
 
-INSERT INTO public.eco_orders (order_code,order_date,id_clients,id_city,id_warehouse) VALUES
-    ('O1001','2026-05-01',1,1,1),
-    ('O1002','2026-05-02',1,1,1),
-    ('O1003','2026-05-02',2,2,2),
-    ('O1004','2026-05-03',2,2,2),
-    ('O1005','2026-05-04',3,3,3),
-    ('O1006','2026-05-05',3,3,3),
-    ('O1007','2026-05-06',1,4,4),
-    ('O1008','2026-05-07',1,4,4),
-    ('O1009','2026-05-08',4,5,4),
-    ('O1010','2026-05-09',4,5,4),
-    ('O1011','2026-05-10',5,6,5),
-    ('O1012','2026-05-11',5,6,5),
-    ('O1013','2026-05-12',9,7,6),
-    ('O1014','2026-05-13',9,7,6),
-    ('O1015','2026-05-14',6,8,6),
-    ('O1016','2026-05-15',6,8,6),
-    ('O1017','2026-05-16',7,1,1),
-    ('O1018','2026-05-17',7,1,1),
-    ('O1019','2026-05-18',8,9,5),
-    ('O1020','2026-05-19',8,9,5);
